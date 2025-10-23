@@ -1,0 +1,198 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply m-0 box-border p-0;
+  }
+
+  body {
+    @apply min-h-screen font-sans leading-relaxed antialiased text-[#e0e0e0];
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .font-display {
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+  }
+
+  .font-mono-deck {
+    font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono",
+      Menlo, monospace;
+  }
+
+  .section-eyebrow {
+    @apply text-xs uppercase tracking-[0.32em] text-white/40;
+  }
+
+  .hero-eyebrow {
+    @apply text-sm uppercase tracking-[0.28em] text-white/60;
+  }
+
+  .token.keyword {
+    color: #9b5cf6;
+  }
+
+  .token.function {
+    color: #00ffff;
+  }
+}
+
+@layer components {
+  .background-grid {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: linear-gradient(
+        rgba(112, 126, 174, 0.08) 1px,
+        transparent 0
+      ),
+      linear-gradient(90deg, rgba(112, 126, 174, 0.08) 1px, transparent 0);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(
+      circle at 50% 20%,
+      rgba(0, 0, 0, 0.6),
+      transparent 70%
+    );
+  }
+
+  .cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 5;
+    background: radial-gradient(
+      circle,
+      rgba(0, 255, 255, 0.3),
+      transparent 55%
+    );
+    mix-blend-mode: screen;
+    filter: blur(0.5px);
+    transition: transform 180ms ease-out;
+  }
+
+  .pointer-parallax {
+    transform: translate3d(
+      calc((var(--pointer-x, 50vw) - 50vw) / 45),
+      calc((var(--pointer-y, 50vh) - 50vh) / 60),
+      0
+    );
+    transition: transform 300ms ease;
+  }
+
+  .panel-parallax {
+    transform: translate3d(
+      calc((var(--pointer-x, 50vw) - 50vw) / 50),
+      calc((var(--pointer-y, 50vh) - 50vh) / 65),
+      0
+    );
+    transition: transform 300ms ease;
+  }
+
+  .feature-visual {
+    @apply relative grid place-items-center overflow-hidden rounded-2xl border border-white/10 bg-black/30;
+    width: 72px;
+    height: 72px;
+  }
+
+  .feature-visual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(
+      from 45deg,
+      rgba(0, 255, 255, 0.35),
+      rgba(155, 92, 246, 0.35),
+      rgba(0, 255, 255, 0.35)
+    );
+    mix-blend-mode: screen;
+  }
+
+  .feature-visual--network {
+    box-shadow: inset 0 0 30px rgba(0, 255, 255, 0.35);
+  }
+
+  .feature-visual--network::before {
+    content: "";
+    width: 42px;
+    height: 42px;
+    border-radius: 9999px;
+    border: 2px dashed rgba(0, 255, 255, 0.3);
+    animation: rotate 12s linear infinite;
+  }
+
+  .feature-visual--ai {
+    box-shadow: inset 0 0 42px rgba(155, 92, 246, 0.35);
+  }
+
+  .feature-visual--ai::before {
+    content: "{ }";
+    font-family: "Space Grotesk", "Inter", -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    font-size: 1.4rem;
+    color: rgba(224, 224, 224, 0.9);
+  }
+
+  .feature-visual--cloud {
+    box-shadow: inset 0 0 36px rgba(53, 93, 255, 0.3);
+  }
+
+  .feature-visual--cloud::before {
+    content: "";
+    width: 60px;
+    height: 40px;
+    border-radius: 9999px;
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(0, 255, 255, 0.45),
+        transparent
+      ),
+      radial-gradient(circle at 70% 40%, rgba(155, 92, 246, 0.45), transparent);
+    filter: blur(2px);
+  }
+
+  .panel-preview-highlight {
+    position: absolute;
+    inset: -30% -40%;
+    background: radial-gradient(
+      circle at 30% 30%,
+      rgba(0, 255, 255, 0.2),
+      transparent 60%
+    );
+    filter: blur(20px);
+    opacity: 0.8;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
